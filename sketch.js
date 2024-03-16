@@ -129,6 +129,11 @@ function keyPressed() {
   }
 }
 
+function mouseClicked() {
+  rpsInstances.splice(0, rpsInstances.length)
+  startSimulation();
+}
+
 function startSimulation() {
   totalAmount = round(random(round(width/21)-15, round(width/21)+15))
   sfxPop.play(0, 1)
