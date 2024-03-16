@@ -45,6 +45,7 @@ function setup() {
   centerX = width / 2;
   centerY = height / 2;
   startSimulation();
+  print(width)
 }
 
 function draw() {
@@ -129,7 +130,7 @@ function keyPressed() {
 }
 
 function startSimulation() {
-  totalAmount = round(random(50, 100))
+  totalAmount = round(random(round(width/21)-15, round(width/21)+15))
   sfxPop.play(0, 1)
   for (let i = 0; i < totalAmount; i++) {
     rpsInstances.push(new rpsInstance(rpsArray[round(random(0, 2))], random(size-5, size+5)))
