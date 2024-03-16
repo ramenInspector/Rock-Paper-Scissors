@@ -8,14 +8,11 @@ class rpsInstance {
         this.position.x = this.realPosition.realX
         this.position.y = this.realPosition.realY
         this.rot = random(1, 360)
-        this.rotDir = round(random(-1, 1))
-        if (this.rotDir == 0) {
-            this.rotDir = 1;
-        }
+        this.rotDir = random([-1, 1])
         this.rotSpeed = 1
-        this.xDir = round(random(-1, 1))
-        this.yDir = round(random(-1, 1))
-        this.speed = 10
+        this.xDir = random([-1, 1])
+        this.yDir = random([-1, 1])
+        this.speed = this.radius / 5
         this.type = type
         this.tint = 255
         this.lerpSpeed = 0.2
@@ -26,8 +23,8 @@ class rpsInstance {
     update() {
         //MOVING AND ROTATES THE RECTANGLES
         
-        this.xDir = round(random(-1, 1))
-        this.yDir = round(random(-1, 1))
+        this.xDir = random([-1, 1])
+        this.yDir = random([-1, 1])
 
         if (this.realPosition.realX < 0 + this.padding) {
             this.realPosition.realX += this.speed
@@ -54,9 +51,6 @@ class rpsInstance {
     }
 
     show() {
-        //DETERMINES THE RECTANGLE TYPES
-
-
         //SHOWS THE RECTANGLES
 
         push()

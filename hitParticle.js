@@ -9,6 +9,7 @@ class hitParticle {
         this.xAcc = 0; // No initial horizontal acceleration
         this.yAcc = 0.4; // Gravity
         this.size = size;
+        this.red = random(100,255)
         this.alpha = 255;
     }
 
@@ -25,7 +26,7 @@ class hitParticle {
         this.rot += 1;
 
         // Decrease alpha for fade-out effect
-        this.alpha -= 7;
+        this.alpha -= 4;
 
         // Draw the particle
         push();
@@ -34,7 +35,7 @@ class hitParticle {
         translate(this.x, this.y);
         rotate(this.rot);
         noStroke();
-        fill(255, 255, 255, this.alpha);
+        fill(this.red, this.red -150, this.red-150, this.alpha);
         rect(0, 0, this.size);
         pop();
     }
