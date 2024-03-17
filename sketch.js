@@ -54,24 +54,28 @@ function draw() {
   }
 
   background(20);
-  push()
-  fill(255, borderTint, borderTint)
-  noStroke()
-  rect(0, 0, width, borderSize)
-  rect(0, 0, borderSize, height)
-  rect(0, height - borderSize, width, borderSize)
-  rect(width - borderSize, 0, borderSize, height)
-  pop()
 
-  noStroke()
-  fill(255, borderTint, borderTint)
-  textSize(20)
-  textAlign(LEFT)
-  text("Players: " + totalAmount, borderSize + 5, borderSize + 20)
-  textAlign(CENTER)
-  text("Press Space to reset simulation.", width / 2, height - borderSize + -20)
+  // push()
+  // fill(255, borderTint, borderTint)
+  // noStroke()
+  // rect(0, 0, width, borderSize)
+  // rect(0, 0, borderSize, height)
+  // rect(0, height - borderSize, width, borderSize)
+  // rect(width - borderSize, 0, borderSize, height)
+  // pop()
+
+  // noStroke()
+  // fill(255, borderTint, borderTint)
+  // textSize(20)
+  // textAlign(LEFT)
+  // text("Players: " + totalAmount, borderSize + 5, borderSize + 20)
+  // textAlign(CENTER)
+  // text("Press Space to reset simulation.", width / 2, height - borderSize + -20)
 
   borderTint += 20
+
+  ////START OF THE SCREEN SHAKE
+  push()
 
   // Apply screen shake effect
   if (shakeDuration > 0) {
@@ -88,6 +92,30 @@ function draw() {
     }
     shakeDuration--;
   }
+
+  // Size of each square
+  var squareSize = round(width/100);
+  
+  // Loop through rows
+  for (var i = 0; i < height; i += squareSize) {
+    // Loop through columns
+    for (var j = 0; j < width; j += squareSize) {
+      // Fill alternate squares with different colors
+      if ((i / squareSize + j / squareSize) % 2 === 0) {
+        fill(0,0,0,0); // White
+      } else {
+        fill(0);   // Black
+      }
+      // Draw square
+      rect(j, i, squareSize, squareSize);
+    }
+  }
+  
+  push()
+  fill(0)
+  rectMode(CENTER)
+  rect(width/2,height/2-5, 130,150, 15)
+  pop()
   drawScoreboard();
 
   for (let i = 0; i < rpsInstances.length; i++) {
@@ -120,6 +148,26 @@ function draw() {
       hitParticles.splice(p, 1)
     }
   }
+
+  //END OF THE SCREEN SHAKE
+  pop()
+  
+  push()
+  fill(255, borderTint, borderTint)
+  noStroke()
+  rect(0, 0, width, borderSize)
+  rect(0, 0, borderSize, height)
+  rect(0, height - borderSize, width, borderSize)
+  rect(width - borderSize, 0, borderSize, height)
+  pop()
+
+  noStroke()
+  fill(255, borderTint, borderTint)
+  textSize(20)
+  textAlign(LEFT)
+  text("Players: " + totalAmount, borderSize + 5, borderSize + 20)
+  textAlign(CENTER)
+  text("Press Space to reset simulation.", width / 2, height - borderSize + -20)
 }
 
 function keyPressed() {
@@ -183,4 +231,9 @@ function startScreenShake(intensity, rotationIntensity, duration) {
   shakeIntensity = intensity;
   shakeRotationIntensity = rotationIntensity;
   shakeDuration = duration;
+}
+
+function touchStarted() {
+  rpsInstances.splice(0, rpsInstances.length)
+  startSimulation();
 }
